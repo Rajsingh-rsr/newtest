@@ -33,10 +33,12 @@ const registerUser = asyncHandler(async (req, res) => {
     // check for user creation
     // return res
 
-    const { fullName, email, password, phone, addresss } = req.body
+    const { fullName, email, password, phone, address } = req.body
+
+    console.log(fullName, email, password, phone, address);
 
     if (
-        [fullName, email, password, phone, addresss].some((field) => field?.trim() === "" || field?.trim() == undefined)
+        [fullName, email, password, phone, address].some((field) => field?.trim() === "" || field?.trim() == undefined)
     ) {
         throw new ApiError(400, "All field are required")
     }
@@ -55,7 +57,7 @@ const registerUser = asyncHandler(async (req, res) => {
             email: email.trim(),
             password,
             phone: phone.trim(),
-            addresss: addresss.trim()
+            address: address.trim()
         }
     )
 
@@ -209,12 +211,12 @@ const getCurrentUser = asyncHandler(async (req, res) => {
 
 const updateAccountDetails = asyncHandler(async (req, res) => {
 
-    const { fullName, addresss, phone } = req.body
+    const { fullName, address, phone } = req.body
 
 
     // _id: this.id,
     // email: this.email,
-    // addresss: this.addresss,
+    // address: this.address,
     // fullName: this.fullName,
     // phone: this.phone
 
@@ -224,7 +226,7 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
         {
             $set: {
                 fullName: fullName?.trim() || req.user?.fullName,
-                addresss: addresss?.trim() || req.user?.addresss,
+                address: address?.trim() || req.user?.address,
                 phone: phone?.trim() || req.user?.phone
             }
         },

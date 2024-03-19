@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema(
             index: true
         },
 
-        addresss: {
+        address: {
             type: String
         },
 
@@ -69,7 +69,7 @@ userSchema.methods.generateAccessToken = function () {
             // we have access of data base using "this"
             _id: this.id,
             email: this.email,
-            addresss: this.addresss,
+            address: this.address,
             fullName: this.fullName,
             phone: this.phone
 
